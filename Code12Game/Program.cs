@@ -1,12 +1,8 @@
-﻿using Code12Game;
-using Spectre.Console;
-using System;
-using System.Text;
-using System.Threading;
-
+﻿using Spectre.Console;
+using Code12Data;
 namespace Code12Game
 {
-   
+
     public class Program
     {
 
@@ -14,17 +10,20 @@ namespace Code12Game
         {
             Utiliteraire.ForcePleinEcran(true);
             AnsiConsole.Clear();
-            while (true)
-            {
-                AnsiConsole.Write(Affichange.GameHUD);
-                Console.ReadKey();
-                Console.Clear();
-                Affichange.DebugLayout();
+
+            AnsiConsole.Write(Affichange.GameHUD);
+            Console.ReadKey();
+            Console.Clear();
+
+            GameData.initialiserCartesSpecialesDebug();
+            Affichange.UpdateDesk(Affichange.CreateDeskLayout());
+            AnsiConsole.Write(Affichange.GameHUD);
+            Console.ReadKey();
 
 
-            }
+
         }
-      
-        
+
+
     }
 }
