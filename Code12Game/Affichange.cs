@@ -8,14 +8,24 @@ namespace Code12Game
             .Visible()
             .SplitColumns(
             new Layout("Left")
-            .Size(103)
-            .SplitRows(new Layout("view").Size(26),new Layout("desk").Update(new Panel("je suis la"))),
-            new Layout("info")
+            .Ratio(3)
+            .SplitRows(new Layout("view").Ratio(3), new Layout("desk").Ratio(2)),
+            new Layout("info").Ratio(1)
             );
-        //test
-        public static void UpdateDesk()
+
+        // Fonction de débogage pour afficher les ratios de tous les layouts
+        public static void DebugLayout()
         {
-            GameHUD.GetLayout("Left").GetLayout("desk").Update(new Panel("je suis la mais pas le meme"));
+            Console.WriteLine(GameHUD.GetLayout("Left").GetLayout("view").Ratio+" view");
+            Console.WriteLine(GameHUD.GetLayout("Left").GetLayout("desk").Ratio+" desk");
+            Console.WriteLine(GameHUD.GetLayout("info").Ratio+" info");
+
         }
+        //fonction de desk(on vien update le layout desk) pour faire l'affichange des carte spécila/panel avec la selection en liste
+        public static void UpdateDesk(Layout layout)
+        {
+            GameHUD.GetLayout("Left").Update(layout);
+        }
+
     }
 }

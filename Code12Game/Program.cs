@@ -9,16 +9,21 @@ namespace Code12Game
    
     public class Program
     {
-        
+
         public static void Main(string[] args)
         {
             Utiliteraire.ForcePleinEcran(true);
-            AnsiConsole.Write(Affichange.GameHUD);
-            
+            AnsiConsole.Clear();
+            while (true)
+            {
+                AnsiConsole.Write(Affichange.GameHUD);
+                Console.ReadKey();
+                Console.Clear();
+                Affichange.DebugLayout();
 
 
+            }
         }
-
       
         
     }
