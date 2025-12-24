@@ -58,45 +58,5 @@ namespace Code12Game
             GameHUD.GetLayout("Left").GetLayout("desk").Update(layout);
         }
 
-    }
-    // class contenant les éléments graphiques comme les panneaux, les cartes spéciales, etc.
-    public static class ElementsGraphiques
-    {
-        public static Panel CarteSpeciale(CarteSpeciale carte)
-        {
-
-
-            var panel = new Panel($"Type: {carte.Type}\nMana: {carte.ManaUse}\nDescription: {carte.Descrition}")
-            {
-                Border = BoxBorder.Square,
-                Header = new PanelHeader(carte.Nom, Justify.Center),
-
-            };
-            switch ((int)carte.Type)
-            {
-                case 0:
-                    {
-                        panel.BorderColor(Color.Red);
-                        break;
-                    }
-                case 1:
-                    {
-                        panel.BorderColor(Color.Green);
-                        break;
-                    }
-                case 2:
-                    {
-                        panel.BorderColor(Color.Purple);
-                        break;
-                    }
-                case 3:
-                    {
-                        panel.BorderColor(Color.Yellow);
-                        break;
-                    }
-
-            }
-            return panel;
-        }
-    }
+    }    
 }

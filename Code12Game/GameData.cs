@@ -1,13 +1,12 @@
-﻿using System.Globalization;
-
-namespace Code12Data
+﻿namespace Code12Data
 {
     public enum TypeCarte
     {
         Attaque,
         Defense,
         Soin,
-        Magie
+        Magie,
+        Score
     }
     // Classe représentant une carte spéciale dans le jeu
     public class CarteSpeciale
@@ -16,7 +15,7 @@ namespace Code12Data
         public TypeCarte Type { get; set; }
         public int ManaUse { get; set; }
         public string Descrition { get; set; }
-        public CarteSpeciale(string nom, TypeCarte type, int manaUse,string descrition)
+        public CarteSpeciale(string nom, TypeCarte type, int manaUse, string descrition)
         {
             Nom = nom;
             Type = type;
@@ -24,13 +23,18 @@ namespace Code12Data
             Descrition = descrition;
         }
     }
-    public static class GameData
+    public static partial class GameData // Partie de la classe GameData pour les variables et propriétés
     {
         // Classe pour stocker les données du jeu comme les cartes spéciales, les joueurs, etc.
 
         //liste représentant les cartes spéciales dans l'inventaire du joueur
         private static List<CarteSpeciale> InventaireCartesSpeciales { get; set; } = new List<CarteSpeciale>();
+        private static byte scoreJoueur; //le maximum de score est 12 donc byte est suffisant
+        private static byte scoreAdversaire; 
 
+    }
+    public static partial class GameData // Partie de la classe GameData pour les méthodes 
+    {
         // Méthode pour ajouter une carte spéciale à l'inventaire
         public static void AjouterCarteSpeciale(CarteSpeciale carte)
         {
@@ -52,6 +56,9 @@ namespace Code12Data
                 InventaireCartesSpeciales.RemoveAt(index);
             }
         }
+
+
+        #region DebugFunctions
         public static void initialiserCartesSpecialesDebug()
         {
             AjouterCarteSpeciale(new CarteSpeciale("Boule de feu", TypeCarte.Attaque, 5, "Inflige des dégâts de feu"));
@@ -65,5 +72,6 @@ namespace Code12Data
             AjouterCarteSpeciale(new CarteSpeciale("Éclair", TypeCarte.Magie, 6, "Inflige des dégâts électriques"));
             AjouterCarteSpeciale(new CarteSpeciale("Lame de glace", TypeCarte.Attaque, 5, "Inflige des dégâts de glace"));
         }
+        #endregion
     }
 }
