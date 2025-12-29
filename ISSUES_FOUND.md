@@ -42,7 +42,7 @@ Créer la classe `DeckFactory` avec une méthode statique `CreateDeskLayout()` q
 
 ## 🟡 Problèmes moyens (bugs potentiels)
 
-### Issue #3: Faute de frappe dans le nom de propriété
+### Issue #3: Faute de frappe dans le nom de propriété ✅ CORRIGÉ
 **Priorité:** MOYENNE  
 **Fichier:** `Code12Game/GameData.cs` (lignes 17, 23)  
 **Description:**  
@@ -61,6 +61,8 @@ Descrition = descrition;
 **Solution suggérée:**  
 Renommer la propriété `Descrition` en `Description` et mettre à jour toutes les références (ligne 13 dans `TypeElementAffichange.cs` utilise déjà "Description" dans l'affichage, ce qui crée de la confusion).
 
+**✅ CORRIGÉ:** La propriété a été renommée en `Description` dans `GameData.cs` et la référence mise à jour dans `TypeElementAffichange.cs`.
+
 ---
 
 ## 🟢 Problèmes mineurs (améliorations suggérées)
@@ -78,7 +80,7 @@ Renommer le fichier en `Affichage.cs` et la classe en `Affichage`, ou garder le 
 
 ---
 
-### Issue #5: Code dupliqué dans la fonction debug
+### Issue #5: Code dupliqué dans la fonction debug ✅ CORRIGÉ
 **Priorité:** FAIBLE  
 **Fichier:** `Code12Game/GameData.cs` (lignes 238-247)  
 **Description:**  
@@ -96,9 +98,11 @@ AjouterCarteSpeciale(new CarteSpeciale("Bouclier magique", TypeCarte.Defense, 3,
 **Solution suggérée:**  
 Supprimer les lignes dupliquées (243-247) ou documenter si c'est intentionnel.
 
+**✅ CORRIGÉ:** Les 5 lignes dupliquées ont été supprimées de la fonction `initialiserCartesSpecialesDebug()`.
+
 ---
 
-### Issue #6: Méthode `ForcePleinEcran` avec paramètre non utilisé
+### Issue #6: Méthode `ForcePleinEcran` avec paramètre non utilisé ✅ CORRIGÉ
 **Priorité:** FAIBLE  
 **Fichier:** `Code12Game/Utiliteraire.cs` (ligne 10)  
 **Description:**  
@@ -108,6 +112,8 @@ La méthode `ForcePleinEcran(bool debug)` accepte un paramètre `debug` qui n'es
 
 **Solution suggérée:**  
 Soit utiliser le paramètre `debug` pour activer/désactiver des fonctionnalités de debug, soit supprimer le paramètre.
+
+**✅ CORRIGÉ:** Le paramètre `debug` est maintenant utilisé pour conditionner l'affichage des informations de débogage (dimensions de fenêtre, bordure de débogage, etc.).
 
 ---
 

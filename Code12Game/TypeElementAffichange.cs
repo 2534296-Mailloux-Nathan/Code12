@@ -10,7 +10,7 @@ namespace Code12Game
         {
 
 
-            var panel = new Panel($"Type: {carte.Type}\nMana: {carte.ManaUse}\nDescription: {carte.Descrition}")
+            var panel = new Panel($"Type: {carte.Type}\nMana: {carte.ManaUse}\nDescription: {carte.Description}")
             {
                 Border = BoxBorder.Square,
                 Header = new PanelHeader(carte.Nom, Justify.Center),

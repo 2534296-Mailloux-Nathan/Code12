@@ -14,13 +14,13 @@
         public string Nom { get; set; }
         public TypeCarte Type { get; set; }
         public int ManaUse { get; set; }
-        public string Descrition { get; set; }
-        public CarteSpeciale(string nom, TypeCarte type, int manaUse, string descrition)
+        public string Description { get; set; }
+        public CarteSpeciale(string nom, TypeCarte type, int manaUse, string description)
         {
             Nom = nom;
             Type = type;
             ManaUse = manaUse;
-            Descrition = descrition;
+            Description = description;
         }
     }
     public static partial class GameData // Partie de la classe GameData pour les variables et propriétés
@@ -235,11 +235,6 @@
         #region DebugFunctions
         public static void initialiserCartesSpecialesDebug()
         {
-            AjouterCarteSpeciale(new CarteSpeciale("Boule de feu", TypeCarte.Attaque, 5, "Inflige des dégâts de feu"));
-            AjouterCarteSpeciale(new CarteSpeciale("Bouclier magique", TypeCarte.Defense, 3, "Réduit les dégâts magiques"));
-            AjouterCarteSpeciale(new CarteSpeciale("Soin rapide", TypeCarte.Soin, 4, "Restaure rapidement des points de vie"));
-            AjouterCarteSpeciale(new CarteSpeciale("Éclair", TypeCarte.Magie, 6, "Inflige des dégâts électriques"));
-            AjouterCarteSpeciale(new CarteSpeciale("Lame de glace", TypeCarte.Attaque, 5, "Inflige des dégâts de glace"));
             AjouterCarteSpeciale(new CarteSpeciale("Boule de feu", TypeCarte.Attaque, 5, "Inflige des dégâts de feu"));
             AjouterCarteSpeciale(new CarteSpeciale("Bouclier magique", TypeCarte.Defense, 3, "Réduit les dégâts magiques"));
             AjouterCarteSpeciale(new CarteSpeciale("Soin rapide", TypeCarte.Soin, 4, "Restaure rapidement des points de vie"));
