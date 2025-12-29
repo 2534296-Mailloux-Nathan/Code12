@@ -2,9 +2,9 @@
 
 Ce document liste les problèmes identifiés lors de la vérification du projet Code12Game.
 
-## 🔴 Problèmes critiques (empêchent la compilation)
+## 🔴 Problèmes critiques (empêchent la compilation)  ✅ CORRIGÉ
 
-### Issue #1: Classe `CardFactory` manquante
+### Issue #1: Classe `CardFactory` manquante  ✅ CORRIGÉ
 **Priorité:** CRITIQUE  
 **Fichier:** `Code12Game/Affichange.cs` (ligne 76)  
 **Description:**  
@@ -22,7 +22,7 @@ Créer la classe `CardFactory` avec une méthode statique `CreateCardLayout(int 
 
 ---
 
-### Issue #2: Classe `DeckFactory` manquante
+### Issue #2: Classe `DeckFactory` manquante  ✅ CORRIGÉ
 **Priorité:** CRITIQUE  
 **Fichier:** `Code12Game/Affichange.cs` (ligne 55)  
 **Description:**  
