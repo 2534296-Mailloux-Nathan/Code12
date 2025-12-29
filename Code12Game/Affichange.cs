@@ -16,6 +16,38 @@ namespace Code12Game
             new Layout("info").Ratio(1)
             );
 
+        private static LiveDisplayContext? _liveContext;
+        private static bool _needsRefresh = false;
+
+        // fonction d'initialisation de l'affichange du jeu avec le live ansi console
+        public static async Task InitializeHUD()
+        {
+            await AnsiConsole.Live(GameHUD)
+                .AutoClear(true)
+                .Overflow(VerticalOverflow.Ellipsis)
+                .Cropping(VerticalOverflowCropping.Top)
+                .StartAsync(async ctx =>
+                {
+                    _liveContext = ctx;
+                    
+                    // Initial rendering
+                    RefreshDesk();
+    
+                    await Task.Delay(100);
+                    
+                    // Garder le Live actif - boucle infinie pour un jeu qui tourne en continu
+                    while (true)
+                    {
+                        if (_needsRefresh)
+                        {
+                            ctx.Refresh();
+                            _needsRefresh = false;
+                        }
+                        await Task.Delay(50);
+                    }
+                });
+        }
+
         //fonction de desk(on vien update le layout desk) pour faire l'affichange des carte spécila/panel avec la selection en liste
         public static void RefreshDesk()
         {
@@ -24,7 +56,11 @@ namespace Code12Game
 
             // Mise à jour du layout
             GameHUD["Left"]["desk"].Update(deckLa);
+
+            // Marquer pour rafraîchissement lors du prochain cycle
+            _needsRefresh = true;
         }
+        
         public static void RenderHUD()
         {
             AnsiConsole.Write(GameHUD);
@@ -35,28 +71,21 @@ namespace Code12Game
         {
             // 1. Accès sécurisé au layout de la vue
             var viewLayout = GameHUD.GetLayout("Left").GetLayout("view");
-            //if (viewLayout == null) return;
 
             // 2. Création de la carte (Popup)
             var scoreCardVisual = CardFactory.CreateCardLayout(scoreValue);
 
-
-
-            // 3. Centrage (L'effet "Popup")
-
-
             // 4. Affichage de la carte
             viewLayout.Update(scoreCardVisual);
+            _needsRefresh = true;
 
-            RenderHUD();
             // 5. Attente
             await Task.Delay(3000);
 
             // 6. Restauration
-            // Comme Layout n'expose pas le contenu actuel, on restaure un contenu par défaut.
-            // Si vous avez une factory pour le contenu de la view, remplacez la ligne ci‑dessous par l'appel approprié.
             var defaultView = new Panel(" ") { Expand = true };
             viewLayout.Update(defaultView);
+            _needsRefresh = true;
         }
 
         // Fonction de débogage pour afficher les ratios de tous les layouts

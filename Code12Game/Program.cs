@@ -13,23 +13,26 @@ namespace Code12Game
             Utiliteraire.ForcePleinEcran();
             AnsiConsole.Clear();
 
-            // Affichage initial du HUD
-            AnsiConsole.Write(Affichange.GameHUD);
-            Console.ReadKey();
-            Console.Clear();
+            // Initialisation de l'affichange du jeu
+            AnsiConsole.MarkupLine("[bold green]Bienvenue dans Code12Game![/]");
+            await Task.Delay(1000);
+            AnsiConsole.Clear();
+            
+            // Lancer le HUD dans une tâche indépendante
+            _ = Task.Run(() => Affichange.InitializeHUD());
+            
+            // Attendre que le HUD soit initialisé
+            await Task.Delay(200);
 
-            // Initialisation des données et rafraîchissement du desk
+            Console.ReadKey(false); // Attendre une touche pour continuer
+            
             GameData.initialiserCartesSpecialesDebug();
-            Affichange.RefreshDesk();
-            AnsiConsole.Write(Affichange.GameHUD);
+            //Affichange.RefreshDesk(); // Rafraîchir l'affichage après modification
+            await Affichange.ShowScoreCardTemporarily(3);
+            
+            Console.ReadKey(false); // Attendre une touche pour continuer
 
-            // --- TEST: afficher temporairement une carte de score ---
-            // Appelle la méthode asynchrone qui affiche une popup durant quelques secondes
-            await Affichange.ShowScoreCardTemporarily(100);
 
-            // Réafficher le HUD après le test
-            AnsiConsole.Write(Affichange.GameHUD);
-            Console.ReadKey();
 
         }
 

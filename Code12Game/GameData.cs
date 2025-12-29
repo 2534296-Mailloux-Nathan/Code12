@@ -245,6 +245,9 @@
             AjouterCarteSpeciale(new CarteSpeciale("Soin rapide", TypeCarte.Soin, 4, "Restaure rapidement des points de vie"));
             AjouterCarteSpeciale(new CarteSpeciale("Éclair", TypeCarte.Magie, 6, "Inflige des dégâts électriques"));
             AjouterCarteSpeciale(new CarteSpeciale("Lame de glace", TypeCarte.Attaque, 5, "Inflige des dégâts de glace"));
+            
+            // Rafraîchir l'affichage après l'initialisation
+            Code12Game.Affichange.RefreshDesk();
         }
         #endregion
     }
