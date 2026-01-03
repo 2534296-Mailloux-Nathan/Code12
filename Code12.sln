@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11304.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code12Game", "Code12Game\Code12Game.csproj", "{714F0D22-4031-4472-B699-CDD3E33D506E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{714F0D22-4031-4472-B699-CDD3E33D506E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714F0D22-4031-4472-B699-CDD3E33D506E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714F0D22-4031-4472-B699-CDD3E33D506E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714F0D22-4031-4472-B699-CDD3E33D506E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18A9EDCC-599C-45B0-AFFD-C11B03E8AB07}
+	EndGlobalSection
+EndGlobal

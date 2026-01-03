@@ -1,0 +1,8 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Code12Game
+/Code12Game/bin/Debug/net8.0
+/Code12Game/obj
