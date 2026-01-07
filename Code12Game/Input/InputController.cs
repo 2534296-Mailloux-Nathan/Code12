@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Code12Data;
 
 namespace Code12Game.Input
 {
@@ -11,13 +12,6 @@ namespace Code12Game.Input
     public partial class InputController
     {
         private Dictionary<ConsoleKey, GameAction> _keyBindings = new();
-        private InputState _currentState = InputState.Desk;
-
-        public InputState CurrentState
-        {
-            get => _currentState;
-            set => _currentState = value;
-        }
 
         /// <summary>
         /// Retourne une copie en lecture seule du dictionnaire de touches
@@ -119,7 +113,7 @@ namespace Code12Game.Input
         /// </summary>
         public void ExecuteAction(GameAction action)
         {
-            switch (_currentState)
+            switch (GameData.ObtenirEtatActuel())
             {
                 case InputState.Desk:
                     ExecuteDeskAction(action);

@@ -65,6 +65,10 @@ namespace Code12Data
 		private static readonly Random _random = new Random();
 		#endregion
 		
+		#region État du Jeu
+		private static InputState _currentState = InputState.Desk;
+		#endregion
+		
 		#region Cartes Spéciales
 		private static List<CarteSpeciale> InventaireCartesSpeciales { get; set; } = new List<CarteSpeciale>();
 		private static List<CarteSpeciale> InventaireCartesSpecialesActif { get; set; } = new List<CarteSpeciale>();
@@ -102,6 +106,26 @@ namespace Code12Data
 	/// </summary>
 	public static partial class GameData
 	{
+		#region Gestion de l'État du Jeu
+		/// <summary>
+		/// Obtient l'état actuel du jeu
+		/// </summary>
+		/// <returns>L'état actuel du jeu</returns>
+		public static InputState ObtenirEtatActuel()
+		{
+			return _currentState;
+		}
+		
+		/// <summary>
+		/// Définit l'état actuel du jeu
+		/// </summary>
+		/// <param name="nouvelEtat">Le nouvel état du jeu</param>
+		public static void DefinirEtatActuel(InputState nouvelEtat)
+		{
+			_currentState = nouvelEtat;
+		}
+		#endregion
+		
 		#region Gestion des Cartes Spéciales
 		/// <summary>
 		/// Ajoute une carte spéciale à l'inventaire actif du joueur

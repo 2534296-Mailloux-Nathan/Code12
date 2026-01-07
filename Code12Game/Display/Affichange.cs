@@ -49,7 +49,7 @@ namespace Code12Game.Display
                 });
         }
 
-        //fonction de desk(on vien update le layout desk) pour faire l'affichange des carte spécila/panel avec la selection en liste
+        //fonction de desk(on vien update le layout desk) pour faire l'affichange des carte spécila/panel avec la selection en tableau
         public static void RefreshDesk()
         {
             // Appel de l'autre classe pour récupérer le contenu

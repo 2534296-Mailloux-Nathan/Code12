@@ -44,13 +44,13 @@ namespace Code12Game.Input
         private void HandleBackInDesk()
         {
             //retour a info
-            CurrentState = InputState.Info;
+            GameData.DefinirEtatActuel(InputState.Info);
         }
 #endregion
 
         private void HandleBackInView()
         {
-            CurrentState = InputState.Desk;
+            GameData.DefinirEtatActuel(InputState.Desk);
         }
     }
 }
