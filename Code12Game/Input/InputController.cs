@@ -36,7 +36,8 @@ namespace Code12Game.Input
                 { ConsoleKey.D, GameAction.Right },
                 { ConsoleKey.Enter, GameAction.Confirm },
                 { ConsoleKey.Backspace, GameAction.Back },
-                { ConsoleKey.Escape, GameAction.Exit }
+                { ConsoleKey.Escape, GameAction.Exit },
+                {ConsoleKey.P, GameAction.PiocherCarte}
             };
         }
 
@@ -184,7 +185,9 @@ namespace Code12Game.Input
         {
             switch (action)
             {
-                //todo: implement info state actions
+                case GameAction.PiocherCarte:
+                    PicherUneCarteScore();
+                    break;
             }
         }
 

@@ -86,7 +86,7 @@ namespace Code12Data
 		
 		#region Statistiques Joueur
 		private static byte scoreJoueur;
-		private static byte manaJoueur;
+		private static byte manaJoueur = 100;
 		private static readonly int PvMaxJoueur = 100;
 		private static int pvJoueur = PvMaxJoueur;
 		#endregion
@@ -474,13 +474,14 @@ namespace Code12Data
 			return manaAdversaire;
 		}
 		
-		/// <summary>
-		/// Méthode utilitaire pour ajouter du mana avec un plafond de 100
-		/// </summary>
-		/// <param name="manaActuel">Le mana actuel</param>
-		/// <param name="manaAjoute">Le mana à ajouter</param>
-		/// <returns>La nouvelle valeur de mana (plafonnée à 100)</returns>
-		private static byte AjouterManaAvecPlafond(byte manaActuel, byte manaAjoute)
+
+        /// <summary>
+        /// Méthode utilitaire pour ajouter du mana avec un plafond de 100
+        /// </summary>
+        /// <param name="manaActuel">Le mana actuel</param>
+        /// <param name="manaAjoute">Le mana à ajouter</param>
+        /// <returns>La nouvelle valeur de mana (plafonnée à 100)</returns>
+        private static byte AjouterManaAvecPlafond(byte manaActuel, byte manaAjoute)
 		{
 			if (manaActuel + manaAjoute > 100)
 			{
@@ -567,13 +568,28 @@ namespace Code12Data
 		{
 			return pvAdversaire;
 		}
-		
-		/// <summary>
-		/// Ajoute des points de vie au joueur
-		/// Les PV sont plafonnés au maximum (100)
+        /// <summary><
+		/// Obtient les points de vie maximum du joueur
 		/// </summary>
-		/// <param name="pv">La quantité de PV à ajouter</param>
-		public static void AjouterPvJoueur(int pv)
+		/// <returns>Les PV maximum du joueur</returns>
+        public static int ObtenirPvMaxJoueur()
+		{
+			return PvMaxJoueur;
+        }
+        /// <summary>
+		/// obtient les points de vie maximum de l'adversaire
+		/// </summary>
+		/// <returns>Les PV maximum de l'adversaire</returns>
+        public static int ObtenirPvMaxAdversaire()
+        {
+			return PvMaxAdversaire;
+        }
+        /// <summary>
+        /// Ajoute des points de vie au joueur
+        /// Les PV sont plafonnés au maximum (100)
+        /// </summary>
+        /// <param name="pv">La quantité de PV à ajouter</param>
+        public static void AjouterPvJoueur(int pv)
 		{
 			pvJoueur += pv;
 			if (pvJoueur > PvMaxJoueur)
@@ -659,3 +675,4 @@ namespace Code12Data
 	}
 	#endregion
 }
+//P7216 pin pour le concours de programmation cegep

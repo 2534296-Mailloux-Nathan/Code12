@@ -1,5 +1,7 @@
 using Code12Data;
 using Code12Game.Display;
+using Code12Logic;
+
 using System;
 
 namespace Code12Game.Input
@@ -46,7 +48,18 @@ namespace Code12Game.Input
             //retour a info
             GameData.DefinirEtatActuel(InputState.Info);
         }
-#endregion
+        #endregion
+
+        #region Info State Handlers
+        private void PicherUneCarteScore()
+        {
+            Code12LogicGame.PigerCarteScoreJoueur();
+
+
+
+        }
+        #endregion
+
 
         private void HandleBackInView()
         {

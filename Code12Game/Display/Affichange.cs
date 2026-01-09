@@ -14,11 +14,14 @@ namespace Code12Game.Display
             new Layout("Left")
             .Ratio(3)
             .SplitRows(new Layout("view").Ratio(3), new Layout("desk").Ratio(2)),
-            new Layout("info").Ratio(1)
+            new Layout("info")
+            .Ratio(1)
+            .SplitRows(
+                new Layout("playerInfo").Size(8),
+                new Layout("stateInfo").Ratio(6))
             );
 
         private static LiveDisplayContext? _liveContext;
-        private static bool _needsRefresh = false;
 
         // fonction d'initialisation de l'affichange du jeu avec le live ansi console
         public static async Task InitializeHUD()
@@ -33,18 +36,13 @@ namespace Code12Game.Display
                     
                     // Initial rendering
                     RefreshDesk();
-    
-                    await Task.Delay(100);
+                    RefrshInfo();
                     
                     // Garder le Live actif - boucle infinie pour un jeu qui tourne en continu
                     while (true)
                     {
-                        if (_needsRefresh)
-                        {
-                            ctx.Refresh();
-                            _needsRefresh = false;
-                        }
-                        await Task.Delay(50);
+                        ctx.Refresh();
+                        await Task.Delay(100); // Rafraîchir toutes les 100ms
                     }
                 });
         }
@@ -57,14 +55,27 @@ namespace Code12Game.Display
 
             // Mise à jour du layout
             GameHUD["Left"]["desk"].Update(deckLa);
-
-            // Marquer pour rafraîchissement lors du prochain cycle
-            _needsRefresh = true;
         }
+        
         public static void RefrshInfo()
         {
+            // Exemple avec des valeurs - remplacez par vos vraies données de joueur
+            int currentHealth = GameData.ObtenirPvJoueur();
+            int maxHealth = GameData.ObtenirPvMaxJoueur();
+            int currentMana = GameData.ObtenirManaJoueur();
+            
+            
+            // Utilisation de la factory pour créer l'affichange des infos joueur
+            var playerInfoPanel = PlayerInfoFactory.CreatePlayerInfoLayoutWithProgressBars(
+                currentHealth, 
+                maxHealth, 
+                currentMana,
+                100
 
-            _needsRefresh = true;
+            );
+            
+            // Mise à jour du layout
+            GameHUD["info"]["playerInfo"].Update(playerInfoPanel);
         }
         
         public static void RenderHUD()
@@ -83,7 +94,6 @@ namespace Code12Game.Display
 
             // 4. Affichage de la carte
             viewLayout.Update(scoreCardVisual);
-            _needsRefresh = true;
 
             // 5. Attente
             await Task.Delay(3000);
@@ -91,7 +101,6 @@ namespace Code12Game.Display
             // 6. Restauration
             var defaultView = new Panel(" ") { Expand = true };
             viewLayout.Update(defaultView);
-            _needsRefresh = true;
         }
 
     }    

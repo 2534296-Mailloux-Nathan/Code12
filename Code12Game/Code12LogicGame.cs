@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Code12Data;
+using Code12Game;
+using Code12Game.Display;
+using Code12Game.Input;
+using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Code12Data;
 
 
 namespace Code12Logic
@@ -11,30 +15,63 @@ namespace Code12Logic
     /// <summary>
     /// Contient la logique principale du jeu (cycle, score, combat).
     /// </summary>
-    public partial class Code12LogicGame
+    public static partial class Code12LogicGame
     {
         #region Cycle de jeu
         /// <summary>
         /// Initialise et démarre une partie.
         /// </summary>
-        public void StartGame()
+        public static async Task StartGame()
         {
-            // Logique de démarrage du jeu
+            Utiliteraire.ForcePleinEcran();
+            AnsiConsole.Clear();
+
+            // Initialisation de l'affichange du jeu
+            AnsiConsole.MarkupLine("[bold green]Bienvenue dans Code12Game![/]");
+            await Task.Delay(1000);
+            AnsiConsole.Clear();
+
+            // Initialiser le contrôleur d'entrée
+            var inputController = new InputController();
+            inputController.LoadSettings("config/input_settings.json");
+
+            var inputHandler = new InputHandler(inputController);
+
+            // Lancer le HUD dans une tâche indépendante
+            _ = Task.Run(() => Affichange.InitializeHUD());
+
+            // Attendre que le HUD soit initialisé
+            await Task.Delay(200);
+
+            Console.ReadKey(false); // Attendre une touche pour continuer
+
+            GameData.initialiserCartesSpecialesDebug();
+            //Affichange.RefreshDesk(); // Rafraîchir l'affichage après modification
+
+
+            //Exemple d'intégration dans une boucle de jeu
+            while (true)
+            {
+                inputHandler.Update();
+                await Task.Delay(16); // ~60 FPS
+            }
+
         }
 
         /// <summary>
         /// Exécute un tour de jeu (pioche, actions, résolution).
         /// </summary>
-        public void PlayTurn()
+        public static void PlayTurn()
         {
-            // Logique pour jouer un tour
-            // logique temporaire pour piger les cartes de score et gérer le score Test
+            //verification 
+
+            
         }
 
         /// <summary>
         /// Termine la partie et applique les états de fin de jeu.
         /// </summary>
-        public void EndGame()
+        public static void EndGame()
         {
             // Logique de fin de jeu
         }
@@ -44,16 +81,25 @@ namespace Code12Logic
         /// <summary>
         /// Pioche une carte de score pour le joueur et applique le score.
         /// </summary>
-        private void PigerCarteScoreJoueur(out byte cartePigee)
+        public static void PigerCarteScoreJoueur()
         {
+            byte cartePigee = 0;
             cartePigee = GameData.PiocherCarteScoreJoueur();
             GameData.AjouterScoreJoueur(cartePigee);
+            if(VerifierScoreJoueur())
+            {
+                //le joueur na pas depasser 12
+            }
+            else
+            {
+                //le joueur a depasser 12
+            }
         }
 
         /// <summary>
         /// Pioche une carte de score pour l'adversaire et applique le score.
         /// </summary>
-        private void PigerCarteScoreAdversaire(out byte cartePigee)
+        private static void PigerCarteScoreAdversaire(out byte cartePigee)
         {
             cartePigee = GameData.PiocherCarteScoreAdversaire();
             GameData.AjouterScoreAdversaire(cartePigee);
@@ -62,7 +108,7 @@ namespace Code12Logic
         /// <summary>
         /// Vérifie que le joueur n'a pas dépassé 12.
         /// </summary>
-        private bool VerifierScoreJoueur()
+        private static bool VerifierScoreJoueur()
         {
             return GameData.ObtenirScoreJoueur() <= 12;
         }
@@ -70,7 +116,7 @@ namespace Code12Logic
         /// <summary>
         /// Vérifie que l'adversaire n'a pas dépassé 12.
         /// </summary>
-        private bool VerifierScoreAdversaire()
+        private static bool VerifierScoreAdversaire()
         {
             return GameData.ObtenirScoreAdversaire() <= 12;
         }
@@ -78,7 +124,7 @@ namespace Code12Logic
         /// <summary>
         /// Vérifie l'égalité des scores.
         /// </summary>
-        private bool VerifierEgaliteScores()
+        private static bool VerifierEgaliteScores()
         {
             return GameData.ObtenirScoreJoueur() == GameData.ObtenirScoreAdversaire();
         }
@@ -86,7 +132,7 @@ namespace Code12Logic
         /// <summary>
         /// Détermine si le joueur a un score supérieur à l'adversaire.
         /// </summary>
-        private bool VerifierJoueurGagne()
+        private static bool VerifierJoueurGagne()
         {
             return GameData.ObtenirScoreJoueur() > GameData.ObtenirScoreAdversaire();
         }
@@ -96,7 +142,7 @@ namespace Code12Logic
         /// <summary>
         /// Calcule la puissance d'attaque et applique les effets (dégâts ou gain de mana).
         /// </summary>
-        public void PuissanceAttaque(out int puissanceAct)
+        public static void PuissanceAttaque(out int puissanceAct)
         {
             if (VerifierEgaliteScores())
             {
