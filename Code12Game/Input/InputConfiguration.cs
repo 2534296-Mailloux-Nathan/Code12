@@ -11,8 +11,8 @@ namespace Code12Game.Input
         Right,
         Confirm,
         Back,
-        Exit,
-        PiocherCarte
+        PiocherCarte,
+        Exit
     }
 
     /// <summary>

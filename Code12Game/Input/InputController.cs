@@ -188,6 +188,12 @@ namespace Code12Game.Input
                 case GameAction.PiocherCarte:
                     PicherUneCarteScore();
                     break;
+                case GameAction.Back:
+                    GameData.DefinirEtatActuel(InputState.Desk);
+                    break;
+                case GameAction.Exit:
+                    HandleExit();
+                    break;
             }
         }
 

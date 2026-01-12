@@ -94,6 +94,7 @@ namespace Code12Logic
             {
                 //le joueur a depasser 12
             }
+            Affichange.RefreshScoreBars();
         }
 
         /// <summary>

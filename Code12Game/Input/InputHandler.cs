@@ -20,16 +20,15 @@ namespace Code12Game.Input
         /// </summary>
         public void Update()
         {
-            if (!Console.KeyAvailable)
+            // Traiter toutes les touches disponibles dans le buffer
+            while (Console.KeyAvailable)
             {
-                return;
-            }
-
-            var keyInfo = Console.ReadKey(intercept: true);
-            
-            if (_controller.KeyBindings.TryGetValue(keyInfo.Key, out var action))
-            {
-                _controller.ExecuteAction(action);
+                var keyInfo = Console.ReadKey(intercept: true);
+                
+                if (_controller.KeyBindings.TryGetValue(keyInfo.Key, out var action))
+                {
+                    _controller.ExecuteAction(action);
+                }
             }
         }
     }

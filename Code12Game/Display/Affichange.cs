@@ -37,7 +37,8 @@ namespace Code12Game.Display
                     // Initial rendering
                     RefreshDesk();
                     RefrshInfo();
-                    
+                    RefreshScoreBars();
+
                     // Garder le Live actif - boucle infinie pour un jeu qui tourne en continu
                     while (true)
                     {
@@ -55,6 +56,7 @@ namespace Code12Game.Display
 
             // Mise à jour du layout
             GameHUD["Left"]["desk"].Update(deckLa);
+            ForceRefresh();
         }
         
         public static void RefrshInfo()
@@ -76,8 +78,27 @@ namespace Code12Game.Display
             
             // Mise à jour du layout
             GameHUD["info"]["playerInfo"].Update(playerInfoPanel);
+            ForceRefresh();
         }
         
+        /// <summary>
+        /// Actualise l'affichage des barres de score
+        /// </summary>
+        public static void RefreshScoreBars()
+        {
+            var scoreBarsPanel = ScoreBarFactory.CreateScoreBarsLayout();
+            GameHUD["Left"]["view"].Update(scoreBarsPanel);
+            ForceRefresh();
+        }
+        
+        /// <summary>
+        /// Force un rafraîchissement immédiat de l'affichage
+        /// </summary>
+        public static void ForceRefresh()
+        {
+            _liveContext?.Refresh();
+        }
+
         public static void RenderHUD()
         {
             AnsiConsole.Write(GameHUD);

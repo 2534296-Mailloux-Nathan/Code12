@@ -66,7 +66,7 @@ namespace Code12Data
 		#endregion
 		
 		#region État du Jeu
-		private static InputState _currentState = InputState.Desk;
+		private static InputState _currentState = InputState.Info;
 		#endregion
 		
 		#region Cartes Spéciales
@@ -656,6 +656,9 @@ namespace Code12Data
 		/// </summary>
 		public static void initialiserCartesSpecialesDebug()
 		{
+			// Initialiser les decks de cartes de score
+			InitialiserDeskCartesScore();
+			
 			// Ajout de cartes de test pour le debug
 			AjouterCarteSpeciale(new CarteSpeciale("1Boule de feu", TypeCarte.Attaque, 5, "Inflige des dégâts de feu"));
 			AjouterCarteSpeciale(new CarteSpeciale("2Bouclier magique", TypeCarte.Defense, 3, "Réduit les dégâts magiques"));
